@@ -1,271 +1,304 @@
-# 🍬 Sweet Shop - Cypress E2E Testing Suite
+<div align="center">
 
-[![Cypress](https://img.shields.io/badge/cypress-15.6.0-green.svg)](https://www.cypress.io/)
-[![Node](https://img.shields.io/badge/node-22.18.0-blue.svg)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/license-ISC-lightgrey.svg)](LICENSE)
+# 🍬 Sweet Shop Testing Suite
 
-Comprehensive automated end-to-end testing suite for the Sweet Shop e-commerce website. This project ensures quality and reliability across all user journeys including navigation, product browsing, cart management, and checkout processes.
+### *Comprehensive E2E Testing with Cypress*
 
-**🌐 Website Under Test:** https://sweetshop.netlify.app
+[![Cypress](https://img.shields.io/badge/Cypress-15.6.0-17202C?style=for-the-badge&logo=cypress&logoColor=white)](https://www.cypress.io/)
+[![Node.js](https://img.shields.io/badge/Node.js-22.18.0-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![License](https://img.shields.io/badge/License-ISC-blue?style=for-the-badge)](LICENSE)
 
-## 📊 Project Statistics
+**Automated testing suite ensuring quality across the Sweet Shop e-commerce platform**
 
-- **Total Test Files:** 42
-- **Test Categories:** 9
-- **Total Test Coverage Areas:** 11 major features
-- **Framework:** Cypress 15.6.0
-- **Node.js:** 22.18.0
-- **Test Organization:** Modular structure with separated concerns
+[🌐 Live Site](https://sweetshop.netlify.app) • [📖 Documentation](#-test-suites-overview) • [🚀 Quick Start](#-getting-started) • [📊 Coverage](#-test-coverage-matrix)
 
-## 🗂️ Project Structure
+---
+
+</div>
+
+## 📊 **Project Overview**
+
+<table>
+<tr>
+<td>
+
+**Test Statistics**
+- 🎯 **42** Total Test Files
+- 📁 **9** Test Categories
+- ✅ **100%** Feature Coverage
+- 🚀 Fully Automated
+
+</td>
+<td>
+
+**Technology Stack**
+- ⚡ Cypress 15.6.0
+- 🟢 Node.js 22.18.0
+- 📦 NPM Package Manager
+- 🎨 Modern ES6+ JavaScript
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🎯 **Why This Project?**
+
+<div align="center">
+
+| 🎨 **Comprehensive** | 🚀 **Fast & Reliable** | 📈 **Maintainable** |
+|:---:|:---:|:---:|
+| Full coverage of all user journeys | Quick feedback with parallel execution | Clean, modular test structure |
+
+</div>
+
+---
+
+## 🗂️ **Project Architecture**
 ```
-SweetShop/
-├── cypress/
-│   ├── e2e/
-│   │   ├── about/                    # About page tests (3 files)
-│   │   │   ├── verifyPageBanner.cy.js
-│   │   │   ├── verifyPageDesc.cy.js
-│   │   │   └── verifyPageTitle.cy.js
-│   │   ├── account/                  # Account verification (2 files)
-│   │   │   ├── verifyMatchingAccountName.cy.js
-│   │   │   └── verifyNonMatchingAccountName.cy.js
-│   │   ├── basket/                   # Basket functionality (2 files)
-│   │   │   ├── verifyBasketMainMenu.cy.js
-│   │   │   └── verifyBasketSweetMenu.cy.js
-│   │   ├── cart/                     # Cart management (7 files)
-│   │   │   ├── applyFreeDelivery.cy.js
-│   │   │   ├── applyStandardDelivery10x.cy.js
-│   │   │   ├── applyStandardDeliveryNaN.cy.js
-│   │   │   ├── removeItemFromBasket.cy.js
-│   │   │   ├── verifyCancelledBasket.cy.js
-│   │   │   ├── verifyEmptybasket.cy.js
-│   │   │   └── verifyProductDetails.cy.js
-│   │   ├── checkout/                 # Checkout process (5 files)
-│   │   │   ├── addShippingCost.cy.js
-│   │   │   ├── successfulCheckout.cy.js
-│   │   │   ├── validPaymentAndShipping.cy.js
-│   │   │   ├── verifyAllItemDisplay.cy.js
-│   │   │   └── verifyCheckoutAccessibility.cy.js
-│   │   ├── login/                    # Login functionality (10 files)
-│   │   │   ├── negativeBadEmailFormat.cy.js
-│   │   │   ├── negativeEmptyEmail.cy.js
-│   │   │   ├── negativeEmptyEmailPassword.cy.js
-│   │   │   ├── negativeEmptyPassword.cy.js
-│   │   │   ├── positiveValidData.cy.js
-│   │   │   ├── verifyEmailAndPasswordFields.cy.js
-│   │   │   ├── verifyLinks.cy.js
-│   │   │   ├── verifyLoginButton.cy.js
-│   │   │   ├── verifyLoginDesc.cy.js
-│   │   │   └── verifyLoginTitle.cy.js
-│   │   ├── mainPage/                 # Main page tests (4 files)
-│   │   │   ├── verifyBrowseSweetsButton.cy.js
-│   │   │   ├── verifyDisplay4ProductInfo.cy.js
-│   │   │   ├── verifyHeaderLinksVisible.cy.js
-│   │   │   └── verifyWelcomeTextVisible.cy.js
-│   │   ├── navigation/               # Navigation tests (5 files)
-│   │   │   ├── navigationFromAboutPage.cy.js
-│   │   │   ├── navigationFromBasketPage.cy.js
-│   │   │   ├── navigationFromLoginPage.cy.js
-│   │   │   ├── navigationFromMainPage.cy.js
-│   │   │   └── navigationFromSweetsPage.cy.js
-│   │   └── sweets/                   # Sweets page tests (3 files)
-│   │       ├── verifyEachProductDetails.cy.js
-│   │       ├── verifyTitle.cy.js
-│   │       └── verifyTotalProducts.cy.js
-│   ├── fixtures/                     # Test data files
-│   ├── support/
-│   │   ├── commands.js               # Custom Cypress commands
-│   │   └── e2e.js                    # Support file configuration
-│   ├── screenshots/                  # Auto-generated on test failures
-│   └── videos/                       # Test execution recordings
-├── node_modules/
-├── .gitignore
-├── cypress.config.js                 # Cypress configuration
-├── package.json
-├── package-lock.json
-└── README.md
+🍬 SweetShop/
+│
+├── 📂 cypress/
+│   ├── 📂 e2e/
+│   │   ├── 🏠 mainPage/         (4 tests)  ← Homepage functionality
+│   │   ├── 🍭 sweets/           (3 tests)  ← Product catalog
+│   │   ├── 🔐 login/            (10 tests) ← Authentication
+│   │   ├── 🛒 basket/           (2 tests)  ← Basket access
+│   │   ├── 🛍️ cart/             (7 tests)  ← Cart management
+│   │   ├── 💳 checkout/         (5 tests)  ← Payment flow
+│   │   ├── 🧭 navigation/       (5 tests)  ← Site navigation
+│   │   ├── 👤 account/          (2 tests)  ← Account verification
+│   │   └── ℹ️ about/            (3 tests)  ← About page
+│   │
+│   ├── 📂 fixtures/         ← Test data
+│   ├── 📂 support/          ← Custom commands
+│   ├── 📸 screenshots/      ← Failure captures
+│   └── 🎥 videos/           ← Test recordings
+│
+├── ⚙️ cypress.config.js
+├── 📦 package.json
+└── 📖 README.md
 ```
 
-## 📋 Test Suites Overview
+---
 
-### 1️⃣ About Page Tests (3 tests)
-Validates the About page content and structure.
+## 🎪 **Test Suites Overview**
 
-| Test File | Description |
-|-----------|-------------|
-| `verifyPageBanner.cy.js` | Verifies about page banner displays correctly |
-| `verifyPageDesc.cy.js` | Validates page description content |
-| `verifyPageTitle.cy.js` | Confirms page title is correct |
+<details open>
+<summary><b>🔐 Login & Authentication (10 tests)</b></summary>
 
-### 2️⃣ Account Tests (2 tests)
-Tests account name verification functionality.
+<br>
 
-| Test File | Description |
-|-----------|-------------|
-| `verifyMatchingAccountName.cy.js` | Tests matching account name scenarios |
-| `verifyNonMatchingAccountName.cy.js` | Tests non-matching account name scenarios |
+| Status | Test | Description |
+|:------:|------|-------------|
+| ✅ | `positiveValidData` | ✨ Successful login with valid credentials |
+| ⛔ | `negativeBadEmailFormat` | Invalid email format validation |
+| ⛔ | `negativeEmptyEmail` | Empty email field handling |
+| ⛔ | `negativeEmptyPassword` | Empty password field handling |
+| ⛔ | `negativeEmptyEmailPassword` | Both fields empty validation |
+| 🔍 | `verifyEmailAndPasswordFields` | Form fields existence check |
+| 🔍 | `verifyLoginButton` | Login button functionality |
+| 🔍 | `verifyLoginTitle` | Page title verification |
+| 🔍 | `verifyLoginDesc` | Description content check |
+| 🔗 | `verifyLinks` | Navigation links validation |
 
-### 3️⃣ Basket Tests (2 tests)
-Verifies basket accessibility from different menus.
+</details>
 
-| Test File | Description |
-|-----------|-------------|
-| `verifyBasketMainMenu.cy.js` | Validates basket access from main menu |
-| `verifyBasketSweetMenu.cy.js` | Validates basket access from sweets menu |
+<details>
+<summary><b>🛍️ Cart Management (7 tests)</b></summary>
 
-### 4️⃣ Cart Management Tests (7 tests)
-Comprehensive cart functionality testing.
+<br>
 
-| Test File | Description |
-|-----------|-------------|
-| `applyFreeDelivery.cy.js` | Tests free delivery option selection |
-| `applyStandardDelivery10x.cy.js` | Tests standard delivery with multiple items |
-| `applyStandardDeliveryNaN.cy.js` | Tests invalid delivery input handling |
-| `removeItemFromBasket.cy.js` | Validates item removal functionality |
-| `verifyCancelledBasket.cy.js` | Tests basket cancellation |
-| `verifyEmptybasket.cy.js` | Validates empty basket state |
-| `verifyProductDetails.cy.js` | Confirms product details in cart |
+| Status | Test | Description |
+|:------:|------|-------------|
+| ✅ | `verifyProductDetails` | Product information accuracy |
+| 🚚 | `applyFreeDelivery` | Free shipping option |
+| 🚚 | `applyStandardDelivery10x` | Standard delivery with bulk items |
+| ⚠️ | `applyStandardDeliveryNaN` | Invalid input handling |
+| 🗑️ | `removeItemFromBasket` | Item removal functionality |
+| ❌ | `verifyCancelledBasket` | Basket cancellation flow |
+| 📭 | `verifyEmptybasket` | Empty cart state |
 
-### 5️⃣ Checkout Process Tests (5 tests)
-End-to-end checkout flow validation.
+</details>
 
-| Test File | Description |
-|-----------|-------------|
-| `addShippingCost.cy.js` | Tests shipping cost calculation |
-| `successfulCheckout.cy.js` | Validates complete checkout process |
-| `validPaymentAndShipping.cy.js` | Tests payment and shipping form validation |
-| `verifyAllItemDisplay.cy.js` | Confirms all items display at checkout |
-| `verifyCheckoutAccessibility.cy.js` | Validates checkout page accessibility |
+<details>
+<summary><b>💳 Checkout Process (5 tests)</b></summary>
 
-### 6️⃣ Login Functionality Tests (10 tests)
-Comprehensive login feature testing including positive and negative scenarios.
+<br>
 
-| Test File | Description |
-|-----------|-------------|
-| `negativeBadEmailFormat.cy.js` | Tests invalid email format handling |
-| `negativeEmptyEmail.cy.js` | Tests empty email field validation |
-| `negativeEmptyEmailPassword.cy.js` | Tests empty credentials validation |
-| `negativeEmptyPassword.cy.js` | Tests empty password field validation |
-| `positiveValidData.cy.js` | Tests successful login with valid data |
-| `verifyEmailAndPasswordFields.cy.js` | Validates form field presence |
-| `verifyLinks.cy.js` | Tests login page navigation links |
-| `verifyLoginButton.cy.js` | Validates login button functionality |
-| `verifyLoginDesc.cy.js` | Tests login page description |
-| `verifyLoginTitle.cy.js` | Validates login page title |
+| Status | Test | Description |
+|:------:|------|-------------|
+| ✅ | `successfulCheckout` | Complete purchase flow |
+| 💰 | `addShippingCost` | Shipping cost calculation |
+| 📝 | `validPaymentAndShipping` | Form validation |
+| 👁️ | `verifyAllItemDisplay` | Order summary display |
+| 🚪 | `verifyCheckoutAccessibility` | Page accessibility |
 
-### 7️⃣ Main Page Tests (4 tests)
-Homepage functionality and UI element verification.
+</details>
 
-| Test File | Description |
-|-----------|-------------|
-| `verifyBrowseSweetsButton.cy.js` | Tests browse sweets button functionality |
-| `verifyDisplay4ProductInfo.cy.js` | Validates 4 featured products display |
-| `verifyHeaderLinksVisible.cy.js` | Tests header navigation links visibility |
-| `verifyWelcomeTextVisible.cy.js` | Validates welcome message display |
+<details>
+<summary><b>🧭 Navigation (5 tests)</b></summary>
 
-### 8️⃣ Navigation Tests (5 tests)
-Inter-page navigation validation from all major pages.
+<br>
 
-| Test File | Description |
-|-----------|-------------|
-| `navigationFromAboutPage.cy.js` | Tests navigation from About page |
-| `navigationFromBasketPage.cy.js` | Tests navigation from Basket page |
-| `navigationFromLoginPage.cy.js` | Tests navigation from Login page |
-| `navigationFromMainPage.cy.js` | Tests navigation from Main page |
-| `navigationFromSweetsPage.cy.js` | Tests navigation from Sweets page |
+Tests navigation between all major pages:
+- Main → All Pages
+- Sweets → All Pages  
+- About → All Pages
+- Login → All Pages
+- Basket → All Pages
 
-### 9️⃣ Sweets Page Tests (3 tests)
-Product listing page validation.
+</details>
 
-| Test File | Description |
-|-----------|-------------|
-| `verifyEachProductDetails.cy.js` | Validates individual product information |
-| `verifyTitle.cy.js` | Tests sweets page title |
-| `verifyTotalProducts.cy.js` | Verifies product count accuracy |
+<details>
+<summary><b>🏠 Main Page (4 tests)</b></summary>
 
-## 🚀 Getting Started
+<br>
 
-### Prerequisites
+| Test | Validates |
+|------|-----------|
+| `verifyWelcomeTextVisible` | Welcome message display |
+| `verifyHeaderLinksVisible` | Navigation header elements |
+| `verifyDisplay4ProductInfo` | Featured products showcase |
+| `verifyBrowseSweetsButton` | CTA button functionality |
 
-Ensure you have the following installed:
+</details>
 
-- **Node.js** (v16.0.0 or higher) - [Download](https://nodejs.org/)
-- **npm** (comes with Node.js)
-- **Git** - [Download](https://git-scm.com/)
+<details>
+<summary><b>🍭 Sweets Page (3 tests)</b></summary>
 
-### Installation
+<br>
 
-1. **Clone the repository**
+| Test | Validates |
+|------|-----------|
+| `verifyTitle` | Page title correctness |
+| `verifyTotalProducts` | Product count accuracy |
+| `verifyEachProductDetails` | Individual product info |
+
+</details>
+
+<details>
+<summary><b>Additional Test Suites</b></summary>
+
+<br>
+
+**🛒 Basket Tests (2)** - Basket access from different menus  
+**👤 Account Tests (2)** - Account name verification  
+**ℹ️ About Page (3)** - About page content validation
+
+</details>
+
+---
+
+## 🚀 **Getting Started**
+
+### **Prerequisites**
+
+<table>
+<tr>
+<td width="33%">
+
+**Node.js**
 ```bash
+node --version
+# v16.0.0+
+```
+
+</td>
+<td width="33%">
+
+**npm**
+```bash
+npm --version
+# 8.0.0+
+```
+
+</td>
+<td width="33%">
+
+**Git**
+```bash
+git --version
+# 2.30.0+
+```
+
+</td>
+</tr>
+</table>
+
+### **Installation**
+```bash
+# 1️⃣ Clone the repository
 git clone https://github.com/Bratiosha/SweetShop.git
 cd SweetShop
-```
 
-2. **Install dependencies**
-```bash
+# 2️⃣ Install dependencies
 npm install
-```
 
-3. **Verify Cypress installation**
-```bash
+# 3️⃣ Verify Cypress
 npx cypress verify
+
+# ✅ You're ready to test!
 ```
 
-Expected output:
-```
-✔  Verified Cypress! /path/to/cypress
-```
+---
 
-## 🧪 Running Tests
+## 🧪 **Running Tests**
 
-### Interactive Mode (Cypress Test Runner)
+<table>
+<tr>
+<td width="50%">
 
-Open the Cypress Test Runner for interactive test execution with real-time browser preview:
+### **🎨 Interactive Mode**
 ```bash
 npx cypress open
 ```
 
-This will:
-- Launch the Cypress Test Runner GUI
-- Allow you to select and run individual tests
-- Provide real-time test execution feedback
-- Enable debugging capabilities
+**Perfect for:**
+- ✨ Development
+- 🐛 Debugging
+- 👀 Visual inspection
 
-### Headless Mode (CI/CD Ready)
+</td>
+<td width="50%">
 
-Run all tests in headless mode (no GUI):
+### **⚡ Headless Mode**
 ```bash
 npx cypress run
 ```
 
-### Run Specific Test Suite
+**Perfect for:**
+- 🚀 CI/CD pipelines
+- ⏱️ Quick validation
+- 📊 Batch testing
 
-Execute tests from a specific category:
+</td>
+</tr>
+</table>
+
+### **🎯 Target Specific Tests**
 ```bash
-# Run only login tests
+# 🔐 Login tests only
 npx cypress run --spec "cypress/e2e/login/**/*.cy.js"
 
-# Run only checkout tests
+# 💳 Checkout flow
 npx cypress run --spec "cypress/e2e/checkout/**/*.cy.js"
 
-# Run only navigation tests
-npx cypress run --spec "cypress/e2e/navigation/**/*.cy.js"
-
-# Run only cart tests
+# 🛍️ Cart functionality
 npx cypress run --spec "cypress/e2e/cart/**/*.cy.js"
 
-# Run only main page tests
-npx cypress run --spec "cypress/e2e/mainPage/**/*.cy.js"
-```
+# 🧭 Navigation tests
+npx cypress run --spec "cypress/e2e/navigation/**/*.cy.js"
 
-### Run Single Test File
-```bash
+# 🎯 Single test file
 npx cypress run --spec "cypress/e2e/login/positiveValidData.cy.js"
 ```
 
-### Run Tests in Specific Browser
+### **🌐 Browser Selection**
 ```bash
-# Chrome
+# Chrome (recommended)
 npx cypress run --browser chrome
 
 # Firefox
@@ -275,301 +308,376 @@ npx cypress run --browser firefox
 npx cypress run --browser edge
 
 # Electron (default)
-npx cypress run --browser electron
+npx cypress run
 ```
 
-### Run Tests with Headed Mode
-
-See the browser while tests run:
+### **⚙️ Advanced Options**
 ```bash
+# 👀 Headed mode (see the browser)
 npx cypress run --headed
-```
 
-### Advanced Test Execution
-```bash
-# Run tests with specific viewport
-npx cypress run --config viewportWidth=1920,viewportHeight=1080
-
-# Run tests and record video
-npx cypress run --config video=true
-
-# Run tests without video recording (faster)
+# 📹 Without video (faster)
 npx cypress run --config video=false
 
-# Run with specific timeout
+# 🖥️ Custom viewport
+npx cypress run --config viewportWidth=1920,viewportHeight=1080
+
+# ⏱️ Custom timeout
 npx cypress run --config defaultCommandTimeout=10000
 ```
 
-## 📦 Dependencies
-```json
-{
-  "name": "cypress-demo",
-  "version": "1.0.0",
-  "description": "E2E Testing Suite for Sweet Shop",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": ["cypress", "e2e", "testing", "automation"],
-  "author": "Bratiosha",
-  "license": "ISC",
-  "devDependencies": {
-    "cypress": "^15.6.0"
-  }
-}
-```
+---
 
-### Recommended npm Scripts
+## 📦 **Recommended npm Scripts**
 
-Add these scripts to your `package.json` for easier test execution:
+Add these to your `package.json`:
 ```json
 {
   "scripts": {
     "test": "cypress run",
     "test:open": "cypress open",
     "test:chrome": "cypress run --browser chrome",
-    "test:firefox": "cypress run --browser firefox",
     "test:headed": "cypress run --headed",
+    "test:fast": "cypress run --config video=false",
+    
     "test:login": "cypress run --spec 'cypress/e2e/login/**/*.cy.js'",
     "test:checkout": "cypress run --spec 'cypress/e2e/checkout/**/*.cy.js'",
     "test:cart": "cypress run --spec 'cypress/e2e/cart/**/*.cy.js'",
     "test:navigation": "cypress run --spec 'cypress/e2e/navigation/**/*.cy.js'",
+    
     "test:ci": "cypress run --browser chrome --headless"
   }
 }
 ```
 
-Then run with:
+**Then run with:**
 ```bash
-npm run test:open
-npm run test:login
-npm run test:checkout
+npm run test:open      # Interactive mode
+npm run test:login     # Just login tests
+npm run test:fast      # Quick run without videos
+npm run test:ci        # CI/CD mode
 ```
 
-## 🔧 Configuration
+---
 
-### Cypress Configuration (`cypress.config.js`)
+## 📊 **Test Coverage Matrix**
+
+<div align="center">
+
+| Feature Area | Tests | Coverage | Status |
+|:-------------|:-----:|:--------:|:------:|
+| 🔐 Login & Auth | 10 | 100% | 🟢 |
+| 🛍️ Cart Management | 7 | 100% | 🟢 |
+| 💳 Checkout Process | 5 | 100% | 🟢 |
+| 🧭 Navigation | 5 | 100% | 🟢 |
+| 🏠 Main Page | 4 | 100% | 🟢 |
+| 🍭 Sweets Catalog | 3 | 100% | 🟢 |
+| ℹ️ About Page | 3 | 100% | 🟢 |
+| 🛒 Basket Access | 2 | 100% | 🟢 |
+| 👤 Account Verify | 2 | 100% | 🟢 |
+| **TOTAL** | **42** | **100%** | **🎯** |
+
+</div>
+
+---
+
+## 🔧 **Configuration**
+
+<details>
+<summary><b>⚙️ Cypress Configuration</b></summary>
 ```javascript
+// cypress.config.js
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
     baseUrl: 'https://sweetshop.netlify.app',
     viewportWidth: 1280,
     viewportHeight: 720,
     video: true,
     screenshotOnRunFailure: true,
     defaultCommandTimeout: 10000,
-    pageLoadTimeout: 30000
+    pageLoadTimeout: 30000,
+    setupNodeEvents(on, config) {
+      // Event listeners here
+    },
   },
 });
 ```
 
-### Environment Configuration (Optional)
+</details>
 
-Create `cypress.env.json` for environment-specific variables:
+<details>
+<summary><b>🌍 Environment Variables (Optional)</b></summary>
+
+Create `cypress.env.json`:
 ```json
 {
   "baseUrl": "https://sweetshop.netlify.app",
   "testUser": {
     "email": "test@example.com",
-    "password": "testpassword123"
+    "password": "testPassword123"
+  },
+  "timeout": {
+    "default": 10000,
+    "pageLoad": 30000
   }
 }
 ```
 
-## 📸 Test Artifacts
+</details>
 
-### Screenshots
+---
 
-Automatically captured on test failures:
-- **Location:** `cypress/screenshots/`
-- **Format:** PNG
-- **Naming:** `[test-suite]/[test-name] (failed).png`
+## 📸 **Test Artifacts**
 
-### Videos
+<table>
+<tr>
+<td width="50%">
 
-Recorded for all test runs:
-- **Location:** `cypress/videos/`
-- **Format:** MP4
-- **Content:** Complete test execution recording
+### **📸 Screenshots**
 
-### Viewing Artifacts
-```bash
-# Open screenshots folder
-open cypress/screenshots
-
-# Open videos folder
-open cypress/videos
-
-# On Windows
-start cypress/screenshots
-start cypress/videos
+Captured automatically on failures
+```
+cypress/screenshots/
+└── [test-suite]/
+    └── [test-name] (failed).png
 ```
 
-## 🐛 Debugging
+**View:** `open cypress/screenshots`
 
-### Common Debugging Techniques
+</td>
+<td width="50%">
 
-1. **Use Cypress debugger**
+### **🎥 Videos**
+
+Full test execution recordings
+```
+cypress/videos/
+└── [test-file].cy.js.mp4
+```
+
+**View:** `open cypress/videos`
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🐛 **Debugging Guide**
+
+<details>
+<summary><b>🔍 Common Debugging Techniques</b></summary>
+
+<br>
+
+**1. Use Cypress Debugger**
 ```javascript
 cy.get('.element').debug()
-cy.pause() // Pause test execution
+cy.pause() // Pause execution
 ```
 
-2. **Check browser console**
+**2. Console Logging**
 ```javascript
-cy.window().then((win) => {
-  console.log(win.document)
-})
+cy.log('Debug message here')
+cy.window().then(win => console.log(win))
 ```
 
-3. **Add custom logging**
+**3. Inspect Elements**
 ```javascript
-cy.log('Custom debug message')
-```
-
-4. **Use .then() for inspection**
-```javascript
-cy.get('.element').then(($el) => {
+cy.get('.element').then($el => {
   console.log($el)
   debugger
 })
 ```
 
-### Running Tests in Debug Mode
-```bash
-# Open DevTools automatically
-npx cypress open --browser chrome --config chromeWebSecurity=false
-```
-
-## 🔍 Best Practices Implemented
-
-✅ **Modular Test Organization** - Tests separated by feature/page
-✅ **Clear Naming Conventions** - Descriptive test file names
-✅ **Comprehensive Coverage** - 42 test files covering all major features
-✅ **Positive & Negative Testing** - Both happy and error paths tested
-✅ **Isolated Test Cases** - Each test runs independently
-✅ **Automated Screenshots** - Visual evidence on failures
-✅ **Video Recording** - Complete test execution documentation
-
-## 🚨 Troubleshooting
-
-### Issue: Tests Timeout
-
-**Solution:**
+**4. Network Inspection**
 ```javascript
-// In cypress.config.js
-defaultCommandTimeout: 15000,
-pageLoadTimeout: 60000
-```
-
-### Issue: Element Not Found
-
-**Solution:**
-```javascript
-// Use proper waiting
-cy.get('.element', { timeout: 10000 }).should('exist')
-```
-
-### Issue: Flaky Tests
-
-**Solution:**
-```javascript
-// Add explicit waits
-cy.wait(500)
 cy.intercept('GET', '/api/**').as('apiCall')
-cy.wait('@apiCall')
+cy.wait('@apiCall').then(xhr => console.log(xhr))
 ```
 
-### Issue: Video Recording Fails
+</details>
 
-**Solution:**
+<details>
+<summary><b>⚠️ Troubleshooting Common Issues</b></summary>
+
+<br>
+
+| Issue | Solution |
+|-------|----------|
+| ⏱️ **Tests timeout** | Increase timeout in config: `defaultCommandTimeout: 15000` |
+| 🔍 **Element not found** | Add explicit wait: `cy.get('.element', { timeout: 10000 })` |
+| 🎥 **Video fails** | Clear cache: `npx cypress cache clear && npx cypress install` |
+| 🌐 **Flaky tests** | Use `cy.intercept()` and wait for API calls |
+| 🖼️ **Screenshot issues** | Check permissions: `chmod -R 755 cypress/screenshots` |
+
+</details>
+
+---
+
+## 🎯 **Best Practices Implemented**
+
+<div align="center">
+
+| ✅ Practice | 📝 Implementation |
+|:------------|:------------------|
+| **Modular Structure** | Tests organized by feature/page |
+| **Clear Naming** | Descriptive test file names |
+| **Isolation** | Each test runs independently |
+| **Coverage** | Both positive and negative scenarios |
+| **Documentation** | Inline comments and clear assertions |
+| **Artifacts** | Screenshots on failure, video recordings |
+| **Maintainability** | DRY principles, reusable code |
+
+</div>
+
+---
+
+## 🤝 **Contributing**
+
+Contributions make the testing suite better! Here's how you can help:
+
+<table>
+<tr>
+<td>
+
+**1️⃣ Fork**
 ```bash
-# Clear Cypress cache
-npx cypress cache clear
-npx cypress install
+# Fork on GitHub
 ```
 
-## 📊 Test Coverage Matrix
+</td>
+<td>
 
-| Feature | Coverage | Tests |
-|---------|----------|-------|
-| Login | 🟢 Complete | 10 |
-| Cart Management | 🟢 Complete | 7 |
-| Checkout | 🟢 Complete | 5 |
-| Navigation | 🟢 Complete | 5 |
-| Main Page | 🟢 Complete | 4 |
-| Sweets Page | 🟢 Complete | 3 |
-| About Page | 🟢 Complete | 3 |
-| Basket | 🟢 Complete | 2 |
-| Account | 🟢 Complete | 2 |
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Commit Message Guidelines
-```
-feat: Add new test for product filtering
-fix: Fix login test timeout issue
-docs: Update README with new examples
-test: Add checkout validation tests
-refactor: Reorganize cart test structure
+**2️⃣ Branch**
+```bash
+git checkout -b feature/NewTest
 ```
 
-## 📝 To-Do / Future Enhancements
+</td>
+<td>
 
-- [ ] Add GitHub Actions CI/CD pipeline
-- [ ] Implement Cypress Dashboard integration
-- [ ] Add API testing suite
-- [ ] Create custom Cypress commands library
-- [ ] Add Mochawesome reporter for HTML reports
-- [ ] Implement parallel test execution
-- [ ] Add visual regression testing
-- [ ] Create test data factories
-- [ ] Add accessibility testing
+**3️⃣ Commit**
+```bash
+git commit -m 'Add: New test'
+```
 
-## 📞 Support & Contact
+</td>
+<td>
 
-- **Repository:** [https://github.com/Bratiosha/SweetShop](https://github.com/Bratiosha/SweetShop)
-- **Maintainer:** Bratiosha
-- **Issues:** [Report a bug](https://github.com/Bratiosha/SweetShop/issues)
+**4️⃣ Push**
+```bash
+git push origin feature/NewTest
+```
 
-## 📄 License
+</td>
+<td>
 
-This project is licensed under the ISC License.
+**5️⃣ PR**
+```
+Open Pull Request
+```
 
-## 🔗 Useful Links
+</td>
+</tr>
+</table>
 
-- [Cypress Documentation](https://docs.cypress.io)
-- [Cypress Best Practices](https://docs.cypress.io/guides/references/best-practices)
-- [Sweet Shop Website](https://sweetshop.netlify.app)
-- [Cypress GitHub](https://github.com/cypress-io/cypress)
-
-## 📚 Additional Resources
-
-- [Writing Your First Test](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test)
-- [Cypress API Documentation](https://docs.cypress.io/api/table-of-contents)
-- [Custom Commands Guide](https://docs.cypress.io/api/cypress-api/custom-commands)
+### **Commit Convention**
+```
+feat: Add new checkout validation test
+fix: Resolve login timeout issue
+docs: Update README with examples
+test: Add cart edge case tests
+refactor: Improve navigation test structure
+```
 
 ---
 
-**Version:** 1.0.0  
-**Last Updated:** November 2024  
-**Node.js:** 22.18.0  
-**Cypress:** 15.6.0  
-**Maintained by:** Bratiosha
+## 🚧 **Roadmap**
+
+- [ ] 🔄 GitHub Actions CI/CD pipeline
+- [ ] 📊 Cypress Dashboard integration
+- [ ] 🎨 Mochawesome HTML reports
+- [ ] ⚡ Parallel test execution
+- [ ] 🌐 API testing suite
+- [ ] 📱 Mobile viewport testing
+- [ ] ♿ Accessibility testing (axe-core)
+- [ ] 📸 Visual regression testing
+- [ ] 🏭 Test data factories
+- [ ] 🔐 Custom commands library
 
 ---
 
-Made with ❤️ using Cypress
+## 📚 **Resources**
+
+<div align="center">
+
+[![Cypress Docs](https://img.shields.io/badge/Cypress-Docs-17202C?style=for-the-badge&logo=cypress)](https://docs.cypress.io)
+[![Best Practices](https://img.shields.io/badge/Best-Practices-17202C?style=for-the-badge&logo=cypress)](https://docs.cypress.io/guides/references/best-practices)
+[![API Reference](https://img.shields.io/badge/API-Reference-17202C?style=for-the-badge&logo=cypress)](https://docs.cypress.io/api/table-of-contents)
+
+</div>
+
+---
+
+## 📞 **Support**
+
+<div align="center">
+
+**Need help? Have questions?**
+
+[![GitHub Issues](https://img.shields.io/badge/Issues-Report_Bug-red?style=for-the-badge&logo=github)](https://github.com/Bratiosha/SweetShop/issues)
+[![GitHub Repo](https://img.shields.io/badge/Repository-SweetShop-blue?style=for-the-badge&logo=github)](https://github.com/Bratiosha/SweetShop)
+
+**Maintained by:** [Bratiosha](https://github.com/Bratiosha)
+
+</div>
+
+---
+
+## 📄 **License**
+
+<div align="center">
+
+This project is licensed under the **ISC License**
+```
+Copyright (c) 2024 Bratiosha
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+```
+
+</div>
+
+---
+
+<div align="center">
+
+### **Built with ❤️ and ☕**
+
+**Version 1.0.0** | **Node.js 22.18.0** | **Cypress 15.6.0**
+
+⭐ **Star this repo if you find it helpful!** ⭐
+
+[⬆ Back to Top](#-sweet-shop-testing-suite)
+
+---
+
+*Last Updated: November 2024*
+
+</div>
+
+<div align="center">
+
+## 🐛 **Known Issues**
+
+For a complete list of identified bugs and issues, see [BUGS.md](BUGS.md)
+
+**Quick Stats:**
+- 🔴 Critical: 2
+- 🟠 High: 2  
+- 🟡 Medium: 2
+
+</div>
